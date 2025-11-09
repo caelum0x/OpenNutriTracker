@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:opennutritracker/features/ai_photo_analysis/presentation/bloc/ai_photo_bloc.dart';
 import 'package:opennutritracker/features/ai_photo_analysis/presentation/bloc/ai_photo_event.dart';
 import 'package:opennutritracker/features/ai_photo_analysis/presentation/screens/analysis_result_screen.dart';
+import 'package:opennutritracker/features/subscription/domain/premium_feature_gate.dart';
 
 /// Screen for capturing food photos
 class CameraCaptureScreen extends StatefulWidget {
@@ -117,7 +118,17 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen> {
     }
   }
 
-  void _processPhoto(String imagePath) {
+  Future<void> _processPhoto(String imagePath) async {
+    // Check premium access for AI scan
+    final userId = 'default_user'; // TODO: Get from auth system
+    final hasAccess = await context.requestPremiumFeature(
+      userId: userId,
+      featureName: PremiumFeatures.aiPhotoScan,
+      featureDisplayName: 'AI Photo Scans',
+    );
+
+    if (!hasAccess || !mounted) return;
+
     // Navigate to analysis result screen
     Navigator.of(context).push(
       MaterialPageRoute(
