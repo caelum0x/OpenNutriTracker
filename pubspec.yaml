@@ -65,6 +65,23 @@ dependencies:
 
   mobile_scanner: ^6.0.2
 
+  # Camera & Image Processing
+  camera: ^0.10.5
+  image_picker: ^1.0.4
+  image: ^4.1.7
+
+  # AR & Depth Sensing for volume calculation
+  ar_flutter_plugin: ^0.7.3
+
+  # Charts & Analytics
+  fl_chart: ^0.69.0
+
+  # Subscriptions & Monetization
+  in_app_purchase: ^3.2.0
+
+  # Social & Sharing
+  share_plus: ^10.1.2
+
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
